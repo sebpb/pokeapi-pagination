@@ -19,7 +19,10 @@ function App() {
       setLoading(false)
       setNextPageUrl(res.data.next)
       setPrevPageUrl(res.data.previous)
-      setPokemon(res.data.results.map(p => p.name))
+      setPokemon(res.data.results.map(p => {
+        const id = p.url.split('/').filter(Boolean).pop()
+        return { name: p.name, id }
+      }))
     })
 
     return () => cancel()
